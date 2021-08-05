@@ -1,38 +1,232 @@
-﻿@model long  
+﻿@model List<User>
 @{
     ViewData["Title"] = "Home Page";
 }
-<style>
-    .chat-area {
-        height: 100vh;
-        background-color: greenyellow !important;
-        overflow-x: scroll;
-    }
-    .message-text{
-        padding:5px;
-    }
-    
-</style>
-<div class="chat-area">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container app">
+    <div class="row app-one">
+        <div class="col-sm-4 side">
+            <div class="side-one">
+                <div class="row heading">
+                    <div class="col-sm-3 col-xs-3 heading-avatar">
+                        <div class="heading-avatar-icon">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                        </div>
+                    </div>
+                    <div class="col-sm-1 col-xs-1  heading-dot  pull-right">
+                        <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-sm-2 col-xs-2 heading-compose  pull-right">
+                        <i class="fa fa-comments fa-2x  pull-right" aria-hidden="true"></i>
+                    </div>
+                </div>
 
+                <div class="row searchBox">
+                    <div class="col-sm-12 searchBox-inner">
+                        <div class="form-group has-feedback">
+                            <input id="searchText" type="text" class="form-control" name="searchText" placeholder="Search">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sideBar">
+                    <div class="sideBar-body" id="left-sidebar-content">
+                        @foreach (var item in Model)
+                        {
+                        <div class="row sidebar-user-area" onclick="GetReleatedMessages(this)" data-id="@item.Id"  data-name="@item.Name" data-surname="@item.Surname">
+                            <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                                <div class="avatar-icon">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                                </div>
+                            </div>
+                            <div class="col-sm-9 col-xs-9 sideBar-main">
+                                <div class="row">
+                                    <div class="col-sm-8 col-xs-8 sideBar-name">
+                                        <span class="name-meta">
+                                            @item.Name @item.Surname
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
+                                        <span class="time-meta pull-right">
+                                            18:18
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="side-two">
+                <div class="row newMessage-heading">
+                    <div class="row newMessage-main">
+                        <div class="col-sm-2 col-xs-2 newMessage-back">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-sm-10 col-xs-10 newMessage-title">
+                            New Chat
+                        </div>
+                    </div>
+                </div>
+                <div class="row composeBox">
+                    <div class="col-sm-12 composeBox-inner">
+                        <div class="form-group has-feedback">
+                            <input id="composeText" type="text" class="form-control" name="searchText" placeholder="Search People">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row compose-sideBar">
+                    <div class="row sideBar-body">
+                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                            <div class="avatar-icon">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-xs-9 sideBar-main">
+                            <div class="row">
+                                <div class="col-sm-8 col-xs-8 sideBar-name">
+                                    <span class="name-meta">
+                                        John Doe
+                                    </span>
+                                </div>
+                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
+                                    <span class="time-meta pull-right">
+                                        18:18
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+            @*<div class="row sideBar-body">
+                    <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                        <div class="avatar-icon">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png">
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-xs-9 sideBar-main">
+                        <div class="row">
+                            <div class="col-sm-8 col-xs-8 sideBar-name">
+                                <span class="name-meta">
+                                    John Doe
+                                </span>
+                            </div>
+                            <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
+                                <span class="time-meta pull-right">
+                                    18:18
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            <!--</div>
+            </div>-->
+        </div>
+
+        <div class="col-sm-8 conversation">
+            <div class="row heading">
+                <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
+                    <div class="heading-avatar-icon">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                    </div>
+                </div>
+                <div class="col-sm-8 col-xs-7 heading-name">
+                    <a class="heading-name-meta">
+                        John Doe
+                    </a>
+                    <span class="heading-online">Online</span>
+                </div>
+                <div class="col-sm-1 col-xs-1  heading-dot pull-right">
+                    <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="row message" id="conversation">
+                @*<div class="row message-previous">
+                <div class="col-sm-12 previous">
+                    <a onclick="previous(this)" id="ankitjain28" name="20">
+                        Show Previous Message!
+                    </a>
+                </div>
+            </div>*@
+
+            </div>
+            <div class="row reply">
+                <div class="col-sm-1 col-xs-1 reply-emojis">
+                    <i class="fa fa-smile-o fa-2x"></i>
+                </div>
+                <div class="col-sm-9 col-xs-9 reply-main">
+                    <textarea class="form-control" rows="1" id="comment" placeholder="Write Something"></textarea>
+                </div>
+                <div class="col-sm-1 col-xs-1 reply-recording">
+                    <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
+                </div>
+                <div class="col-sm-1 col-xs-1 reply-send">
+                    <a id="btn-send" onclick="SendMessage(this)" data-releated-user-id="">
+                        <i class="fa fa-send fa-2x" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="row">
-        <input class="form-control" style="width:95%" data-releated-user-id="@Model" id="send-message-input" placeholder="Bir şeyler yazın" />
-        <button class="btn btn-success" onclick="SendMessage(@Model)">></button>
-</div>
+
+
+
+
+
 <script>
-    var releatedUserId = @Model;
+    $(function () {
+        $(".heading-compose").click(function () {
+            $(".side-two").css({
+                "left": "0"
+            });
+        });
+
+        $(".newMessage-back").click(function () {
+            $(".side-two").css({
+                "left": "-100%"
+            });
+        });
+    })
+    $("#comment").on('keyup', function (e) {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            $("#btn-send").click();
+        }
+        return;
+    });
 
 
-    setTimeout(() => {
-        signalRconnection.invoke("GetMessage", releatedUserId);
+    $(document).ready(() => { 
+        $("#conversation").html('');
+        $(".conversation").css("filter", "blur(3px)");
+    })
 
-    }, 300)
+
+    function ScrollSendBottom() {
+        $("#conversation").animate({ scrollTop: 10000 }, '300');
+    }
 
 
-    function SendMessage(relatedUserId) {
-        let messageText = $("#send-message-input").val();
-        var currentUserId = $(".current-user-link").attr("data-user-id");
+    function GetReleatedMessages(element) {
+        var id = $(element).attr("data-id");
+        var name = $(element).attr("data-name");
+        var surname = $(element).attr("data-surname");
+        $(".heading-name-meta").html(`${name} ${surname}`);
+        $("#btn-send").attr("data-releated-user-id",id);
+        signalRconnection.invoke("GetMessage", parseInt(id));
+        setTimeout(() => { ScrollSendBottom(); }, 450)
+        $(".conversation").css("filter", "");
+
+        
+    }
+
+    function SendMessage(element) {
+        var relatedUserId = $(element).attr("data-releated-user-id");
+        let messageText = $("#comment").val();
         $.ajax({
             type: "POST",
             url:'@Url.Action("SendMessage", "Home")',
@@ -41,11 +235,17 @@
                 userId: relatedUserId
             },
             success: (response) => {
-                if (response==1) {
-                    signalRconnection.invoke("GetMessage", relatedUserId);
+                if (response == 1) {
+                    signalRconnection.invoke("GetMessage", parseInt(relatedUserId));
+                    $("#comment").val('');
+                    ScroolSlide();
                 }
             }
-
         });
+
+    }
+    function ScroolSlide(scrollscore=75) {
+        var scroll_top = $("#conversation").scrollTop();
+        $("#conversation").animate({ scrollTop: scroll_top + scrollscore }, '300');
     }
 </script>

@@ -27,9 +27,9 @@ namespace ChatApplication.Web.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public IActionResult Index(long userId)
+        public IActionResult Index()
         {
-            return View(userId);
+            return View(UserList());
         }
 
         public IActionResult Privacy()
@@ -56,10 +56,10 @@ namespace ChatApplication.Web.Controllers
             return View();
         }
      
-        public IActionResult UserList()
+        public List<User> UserList()
         {
             User user = GetCurrentMember();
-            return View(_chatprojectdbContext.Users.Where(x => x.Id != user.Id).ToList());
+            return _chatprojectdbContext.Users.Where(x => x.Id != user.Id).ToList();
         }
         public int Login(string password, string mailAddress)
         {

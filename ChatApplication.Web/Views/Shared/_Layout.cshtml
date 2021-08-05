@@ -8,11 +8,9 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <style>
-        .message-text-left {
-            background: blue;
-            width: 45%;
+/*        .message-text-left {
             border-radius: 9px;
-            color: white;
+            color: black;
             font-size: large;
             margin-left: 10px;
         }
@@ -21,6 +19,12 @@
             color: black;
             font-size: large;
             margin-right: 10px;
+        }
+        sub{
+            margin-top:5px;
+        }*/
+        main{
+            height:85vh;
         }
     </style>
 </head>
@@ -44,6 +48,7 @@
                     </ul>
                 </div>
             </div>
+     
         </nav>
     </header>
     <div class="container">
@@ -60,29 +65,29 @@
     @await RenderSectionAsync("Scripts", required: false)
 
 <script>
-    const chatArea = $(".chat-area");
+    const chatArea = $("#conversation");
     var signalRconnection = new signalR.HubConnectionBuilder().withUrl("/signal/message-hub").build();
     signalRconnection.start();
-  
+
+
     signalRconnection.on("Messages", (messageList) => {
         var currentUserId = $(".current-user-link").attr("data-user-id");
         var elementFloatStyle = "";
         chatArea.html("");
         messageList.forEach((value, index) => {
             if (value.senderUserId == currentUserId) {
-                
-                elementFloatStyle = "right"; 
+                elementFloatStyle = "sender";
             }
             else {
-                elementFloatStyle = "left";
+                elementFloatStyle = "receiver";
             }
-            var elementString = `<p class="message-text message-text-${elementFloatStyle} text-${elementFloatStyle}">${value.messageText}</p>`;
-            chatArea.append(elementString);
+            var dateString = value.sendDate.split("T")[1].split(".")[0];
+            var messageBody = `<div class="row message-body"> <div class="col-sm-12 message-main-${elementFloatStyle}"> <div class="${elementFloatStyle}"> <div class="message-text"> ${value.messageText} </div><span class="message-time pull-right"> ${dateString} </span> </div></div></div>`;
+            chatArea.append(messageBody);
         });
-        console.log(messageList);
-    });
- 
 
+        ScroolSlide();
+    });
 </script>
 </body>
 </html>
