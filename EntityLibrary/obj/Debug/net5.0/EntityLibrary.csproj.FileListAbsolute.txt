@@ -1,0 +1,12 @@
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\bin\Debug\net5.0\EntityLibrary.deps.json
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\bin\Debug\net5.0\EntityLibrary.dll
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\bin\Debug\net5.0\ref\EntityLibrary.dll
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\bin\Debug\net5.0\EntityLibrary.pdb
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\obj\Debug\net5.0\EntityLibrary.csprojAssemblyReference.cache
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\obj\Debug\net5.0\EntityLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\obj\Debug\net5.0\EntityLibrary.AssemblyInfoInputs.cache
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\obj\Debug\net5.0\EntityLibrary.AssemblyInfo.cs
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\obj\Debug\net5.0\EntityLibrary.csproj.CoreCompileInputs.cache
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\obj\Debug\net5.0\EntityLibrary.dll
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\obj\Debug\net5.0\ref\EntityLibrary.dll
+C:\Users\LTech\source\repos\ChatApplication.Solution\EntityLibrary\obj\Debug\net5.0\EntityLibrary.pdb

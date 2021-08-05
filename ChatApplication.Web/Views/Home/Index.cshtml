@@ -1,0 +1,51 @@
+﻿@model long  
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .chat-area {
+        height: 100vh;
+        background-color: greenyellow !important;
+        overflow-x: scroll;
+    }
+    .message-text{
+        padding:5px;
+    }
+    
+</style>
+<div class="chat-area">
+
+</div>
+<div class="row">
+        <input class="form-control" style="width:95%" data-releated-user-id="@Model" id="send-message-input" placeholder="Bir şeyler yazın" />
+        <button class="btn btn-success" onclick="SendMessage(@Model)">></button>
+</div>
+<script>
+    var releatedUserId = @Model;
+
+
+    setTimeout(() => {
+        signalRconnection.invoke("GetMessage", releatedUserId);
+
+    }, 300)
+
+
+    function SendMessage(relatedUserId) {
+        let messageText = $("#send-message-input").val();
+        var currentUserId = $(".current-user-link").attr("data-user-id");
+        $.ajax({
+            type: "POST",
+            url:'@Url.Action("SendMessage", "Home")',
+            data: {
+                messageText,
+                userId: relatedUserId
+            },
+            success: (response) => {
+                if (response==1) {
+                    signalRconnection.invoke("GetMessage", relatedUserId);
+                }
+            }
+
+        });
+    }
+</script>

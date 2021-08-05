@@ -1,0 +1,15 @@
+﻿@model List<User>
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>UserList</h1>
+<br />
+@foreach (var item in Model)
+{
+    <div>
+        <a href="/Home/Index/?userId=@item.Id"> <span class="badge badge-danger">@item.Name @item.Surname</span></a>
+       
+    </div>
+}
